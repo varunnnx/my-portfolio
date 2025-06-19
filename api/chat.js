@@ -1,13 +1,13 @@
-import OpenAI from "openai";
+import { Configuration, OpenAIApi } from "openai";
 
-const openai = new OpenAI({
+const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+const openai = new OpenAIApi(configuration);
+
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).send("Method not allowed");
-  }
+  if (req.method !== "POST") return res.status(405).send("Method not allowed");
 
   if (!process.env.OPENAI_API_KEY) {
     return res.status(500).json({ error: "OPENAI_API_KEY is missing in environment variables." });
@@ -16,7 +16,7 @@ export default async function handler(req, res) {
   const { messages } = req.body;
 
   try {
-    const completion = await openai.chat.completions.create({
+    const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [
         {
@@ -27,10 +27,10 @@ export default async function handler(req, res) {
       ],
     });
 
-    const reply = completion.choices[0].message;
+    const reply = completion.data.choices[0].message;
     res.status(200).json({ reply });
   } catch (error) {
-    console.error("Chatbot error:", error?.response?.data || error.message || error);
+    console.error("Chatbot error:", error.response?.data || error.message || error);
     res.status(500).json({ error: "Something went wrong with OpenAI API." });
   }
 }
