@@ -16,10 +16,10 @@ export default async function handler(req, res) {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
-        "HTTP-Referer": "https://your-deployed-vercel-url.vercel.app", // ✅ Replace this
+        "HTTP-Referer": "https://my-portfolio-varuns-projects-194bb1fd.vercel.app/", // ✅ Replace this
       },
       body: JSON.stringify({
-        model: "mistral/mistral-7b-instruct",
+        model: "openai/gpt-3.5-turbo",
         messages: [
           {
             role: "system",
