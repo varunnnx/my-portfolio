@@ -22,10 +22,21 @@ const ChatBot = () => {
       body: JSON.stringify({ messages: [...messages, userMessage] }),
     });
 
-    const data = await res.json();
-    setMessages([...messages, userMessage, data.reply]);
-    setLoading(false);
-  };
+const data = await res.json();
+
+if (data?.reply) {
+  setMessages([...messages, userMessage, data.reply]);
+} else {
+  setMessages([
+    ...messages,
+    userMessage,
+    {
+      role: "assistant",
+      content: "⚠️ Sorry, something went wrong. Try again later.",
+    },
+  ]);
+}
+  }
 
   return (
     <>
