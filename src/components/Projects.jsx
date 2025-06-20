@@ -8,14 +8,14 @@ const projects = [
     description: "A PHP-based blog platform with OTP auth, CRUD functionality, and a clean UI.",
     tech: ["PHP", "MySQL", "HTML", "CSS", "JavaScript"],
     github: "https://github.com/varunnnx/khana-khazana",
-    demo: "#"
+    
   },
   {
     title: "Little Lemon",
     description: "Django-based restaurant site with pages for booking, menu, and contact.",
     tech: ["Python", "Django", "SQLite", "HTML", "CSS"],
     github: "https://github.com/varunnnx/little-lemon",
-    demo: "#"
+    
   },
 
   {
@@ -23,7 +23,7 @@ const projects = [
   description: "An end-to-end ML pipeline for text classification using TF-IDF and traditional classifiers.",
   tech: ["Python", "Pandas", "Scikit-learn", "NLTK", "Jupyter Notebook"],
   github: "https://github.com/varunnnx/NLP-Text-Classification-Model",
-  demo: "#"
+
 }
 
 ];
@@ -62,9 +62,7 @@ const ProjectCard = ({ project }) => {
         <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-sm text-accent hover:underline">
           GitHub
         </a>
-        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-sm text-accent hover:underline">
-          Live Demo
-        </a>
+        
       </div>
     </motion.div>
   );
