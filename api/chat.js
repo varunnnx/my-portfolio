@@ -1,56 +1,48 @@
-import OpenAI from "openai";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
 export default async function handler(req, res) {
-  // Method check
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  // Environment variable check
-  if (!process.env.OPENAI_API_KEY) {
-    return res.status(500).json({ error: "OPENAI_API_KEY is missing in environment variables." });
+  const apiKey = process.env.OPENROUTER_API_KEY;
+  if (!apiKey) {
+    return res.status(500).json({ error: "Missing OPENROUTER_API_KEY in env" });
   }
 
-  // Request body validation
   const { messages } = req.body;
+
   if (!Array.isArray(messages) || messages.length === 0) {
-    return res.status(400).json({ error: "Invalid or missing 'messages' array in request body." });
+    return res.status(400).json({ error: "Invalid messages array" });
   }
 
   try {
-    // OpenAI chat completion request
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo", // You can change this to "gpt-4" if you have access
-      messages: [
-        {
-          role: "system",
-          content: "You are a helpful AI assistant for Varun Nagpal’s portfolio.",
-        },
-        ...messages,
-      ],
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+        "HTTP-Referer": "https://your-portfolio-site.vercel.app", // ✅ replace with your domain
+      },
+      body: JSON.stringify({
+        model: "mistral/mistral-7b-instruct", // other options: "meta-llama/llama-3-8b-instruct", etc.
+        messages: [
+          {
+            role: "system",
+            content: "You are Varun's AI portfolio guide. Answer briefly, clearly, and helpfully.",
+          },
+          ...messages,
+        ],
+      }),
     });
 
-    const reply = completion.choices?.[0]?.message;
-    if (!reply) {
-      throw new Error("OpenAI response did not contain a valid reply.");
+    const data = await response.json();
+
+    if (!data?.choices?.[0]?.message) {
+      throw new Error("No valid message in OpenRouter response");
     }
 
-    // Success
-    return res.status(200).json({ reply });
+    return res.status(200).json({ reply: data.choices[0].message });
   } catch (error) {
-    // Structured logging
-    console.error("Chatbot error:", error.response?.data || error.message || error);
-
-    // OpenAI specific error
-    if (error.response?.status === 429) {
-      return res.status(429).json({ error: "Rate limit exceeded. Please check your API usage." });
-    }
-
-    // General error
-    return res.status(500).json({ error: "Something went wrong while communicating with OpenAI." });
+    console.error("Chatbot error:", error);
+    return res.status(500).json({ error: "Chatbot failed. Please try again later." });
   }
 }
