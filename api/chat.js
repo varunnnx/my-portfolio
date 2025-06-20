@@ -10,24 +10,20 @@ export default async function handler(req, res) {
 
   const { messages } = req.body;
 
-  if (!Array.isArray(messages) || messages.length === 0) {
-    return res.status(400).json({ error: "Invalid messages array" });
-  }
-
   try {
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
-        "HTTP-Referer": "https://your-portfolio-site.vercel.app", // ✅ replace with your domain
+        "HTTP-Referer": "https://your-deployed-vercel-url.vercel.app", // ✅ Replace this
       },
       body: JSON.stringify({
-        model: "mistral/mistral-7b-instruct", // other options: "meta-llama/llama-3-8b-instruct", etc.
+        model: "mistral/mistral-7b-instruct",
         messages: [
           {
             role: "system",
-            content: "You are Varun's AI portfolio guide. Answer briefly, clearly, and helpfully.",
+            content: "You are Varun's AI portfolio assistant. Answer briefly and clearly.",
           },
           ...messages,
         ],
@@ -36,13 +32,15 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
-    if (!data?.choices?.[0]?.message) {
-      throw new Error("No valid message in OpenRouter response");
+    // ✅ Add checks and log the full response
+    if (!data?.choices || !data.choices[0]?.message) {
+      console.error("⚠️ OpenRouter response malformed:", JSON.stringify(data));
+      return res.status(500).json({ error: "No valid AI response received." });
     }
 
     return res.status(200).json({ reply: data.choices[0].message });
-  } catch (error) {
-    console.error("Chatbot error:", error);
-    return res.status(500).json({ error: "Chatbot failed. Please try again later." });
+  } catch (err) {
+    console.error("🔥 Chatbot error:", err);
+    return res.status(500).json({ error: "Something went wrong with OpenRouter." });
   }
 }
