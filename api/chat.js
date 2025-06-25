@@ -19,7 +19,7 @@ export default async function handler(req, res) {
         "HTTP-Referer": "https://my-portfolio-varuns-projects-194bb1fd.vercel.app/", // ✅ Your actual deployed site
       },
       body: JSON.stringify({
-        model: "openai/gpt-3.5-turbo",
+        model: "openrouter/openai/gpt-3.5-turbo",
         messages: [
           {
             role: "system",
