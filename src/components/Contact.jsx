@@ -32,7 +32,7 @@ const Contact = () => {
         viewport={{ once: true }}
       >
         <a
-          href="mailto:work.varunnagpal@gmail.com"
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=work.varunnagpal@gmail.com"
           className="bg-accent text-white px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-opacity-90 transition"
         >
           <FaEnvelope /> Say Hello
