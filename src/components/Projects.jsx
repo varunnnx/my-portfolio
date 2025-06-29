@@ -14,7 +14,7 @@ const projects = [
     title: "Little Lemon",
     description: "Django-based restaurant site with pages for booking, menu, and contact.",
     tech: ["Python", "Django", "SQLite", "HTML", "CSS"],
-    github: "https://github.com/varunnnx/little-lemon",
+    github: "https://github.com/varunnnx/littlelemon",
     
   },
 
