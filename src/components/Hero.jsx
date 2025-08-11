@@ -39,7 +39,7 @@ const Hero = () => {
         <motion.a
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          href="https://drive.google.com/file/d/1X0SItA6HIu29RysFY5VcS-8bOuoHC7gQ/view?usp=sharing"
+          href="https://drive.google.com/file/d/1eHUn4TPi71Vw4dQ3c_0TtsGMwgf2Priv/view?usp=sharing"
           target="_blank"
           className="px-6 py-2 rounded-lg bg-accent text-white hover:bg-blue-700 transition"
         >
