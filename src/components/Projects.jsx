@@ -4,29 +4,49 @@ import { useEffect } from "react";
 
 const projects = [
   {
+    title: "SkillBridge",
+    description:
+      "A full-stack NLP-based career path recommender that parses resumes and matches them to tech roles with 90%+ accuracy.",
+    tech: ["Flask", "React.js", "Tailwind CSS", "Python", "NLP"],
+    github: "https://github.com/varunnnx/Skillbridge",
+  },
+  {
+    title: "NLP Text Classification",
+    description:
+      "A binary classifier trained on 7,600+ tweets to detect disaster-related content, achieving 88% accuracy.",
+    tech: ["Python", "Scikit-learn", "NLTK", "Pandas"],
+    github: "https://github.com/varunnnx/NLP-Text-Classification-Model",
+  },
+  {
+    title: "Snap Shot",
+    description:
+      "A React gallery app with real-time image fetching from Flickr API and efficient state management.",
+    tech: ["React.js", "React Router", "Axios", "Context API"],
+    github: "https://github.com/varunnnx/Snapshot-master",
+  },
+  {
     title: "Khana Khazana",
-    description: "A PHP-based blog platform with OTP auth, CRUD functionality, and a clean UI.",
+    description:
+      "A PHP-based blog platform with OTP authentication, CRUD functionality, and secure user management.",
     tech: ["PHP", "MySQL", "HTML", "CSS", "JavaScript"],
     github: "https://github.com/varunnnx/khana-khazana",
-    
   },
   {
     title: "Little Lemon",
-    description: "Django-based restaurant site with pages for booking, menu, and contact.",
+    description:
+      "A Django-powered restaurant booking website with pages for menu, reservations, and contact.",
     tech: ["Python", "Django", "SQLite", "HTML", "CSS"],
     github: "https://github.com/varunnnx/littlelemon",
-    
   },
-
   {
-  title: "NLP Text Classification",
-  description: "An end-to-end ML pipeline for text classification using TF-IDF and traditional classifiers.",
-  tech: ["Python", "Pandas", "Scikit-learn", "NLTK", "Jupyter Notebook"],
-  github: "https://github.com/varunnnx/NLP-Text-Classification-Model",
-
-}
-
+    title: "NGO Management Website",
+    description:
+      "A dynamic platform for NGOs to manage events, registrations, and community tasks.",
+    tech: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
+    github: "", // if you have link, we can add it
+  },
 ];
+
 
 const ProjectCard = ({ project }) => {
   const ref = useRef(null);
