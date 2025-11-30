@@ -2,8 +2,19 @@ import { motion } from "framer-motion";
 
 const experiences = [
   {
-    logo: "/logos/fileago.png", // place image in /public/logos/
-    role: "Techno-Commercial Intern",
+    logo: "/logos/purplle.png", 
+    role: "Data Analyst",
+    company: "Purplle.com",
+    duration: "Apr 2024 – Present",
+    points: [
+      "Optimized pricing & assortment analytics.",
+      "Developed forecasting insights & automated reports.",
+      "Improved marketplace performance using SQL & BigQuery.",
+    ],
+  },
+  {
+    logo: "/logos/fileago.png",
+    role: "IT Consultant ",
     company: "FileAgo",
     duration: "Jan 2024 – Mar 2024",
     points: [
@@ -22,7 +33,6 @@ const experiences = [
       "Analyzed NLP sentiment from feedback.",
     ],
   },
-
 ];
 
 const Experience = () => {
